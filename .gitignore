@@ -1,0 +1,13 @@
+__pycache__
+./
+/hf_venv
+data
+*.pyc
+*.db
+*~
+*.sqlite3
+.vscode
+.docx#
+files/
+*.code-workspace
+media/
