@@ -32,3 +32,34 @@ class HomePageView(TemplateView):
             return render(request, 'files_host/index.html', context={'files': files})
         else:
             return redirect('login')
+
+class AuthenticatedView(TemplateView):   
+    
+    def get(self, request, **kwargs): 
+        login_form = AuthenticationForm()      
+        return render(request, 'file_host_template/login.html', context={'login_form': login_form})
+   
+    def post(self, request, **kwargs):
+        login_form = AuthenticationForm(request.POST)
+        try:
+            login_user(request)
+        except:
+            return redirect('login')
+        return redirect('home')
+
+
+class RegisterView(TemplateView):    
+
+    def get(self, request, **kwargs):
+        register_form = UserCreationForm()     
+        return render(request, 'file_host_template/register.html', context={'register_form': register_form})
+    
+    def post(self, request, **kwargs):
+        register_form = UserCreationForm(request.POST)
+        if register_form.is_valid():
+            new_user = register_form.save()
+            new_user.save()
+            user_au = authenticate(username=request.POST['username'], password=request.POST['password1'])
+            login(request, user_au)               
+            return redirect('home')
+        return render(request, 'file_host_template/register.html', context={'register_form': register_form})   
