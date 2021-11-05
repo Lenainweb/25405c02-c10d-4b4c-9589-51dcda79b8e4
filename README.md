@@ -23,7 +23,7 @@ $ . venv/bin/activate
 ##### Install the dependencies
 
 ```
-$ pip install -r requirements.txt
+$ pip install django 
 ```
 
 ##### Create the database
