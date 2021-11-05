@@ -92,11 +92,21 @@ class AddFileView(TemplateView):
             return redirect('home')
         return render(request, 'file_host_template/add_file.html', context={'file_form': file_form})
 
-class FileDetail(DetailView):
+# class FileDetail(DetailView):
 
-    model = File
-    slug_field = "id"
-    context_object_name = 'file_detail'
-    template_name = "file_host_template/file_detail.html"
+#     model = File
+#     slug_field = "id"
+#     context_object_name = 'file_detail'
+#     template_name = "file_host_template/file_detail.html"
+
+
+class MyFilesView(TemplateView):
+
+    def get(self, request, **kwargs):
+        if request.user.is_authenticated:
+            my_files = File.objects.filter(owner=request.user).order_by('count_download')            
+            return render(request, 'file_host_template/my_files.html', context={'my_files': my_files})
+        else:
+            return redirect('login')
 
     

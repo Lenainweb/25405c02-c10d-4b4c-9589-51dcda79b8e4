@@ -11,6 +11,8 @@ urlpatterns = [
     path('register', RegisterView.as_view(), name='register' ),
     path('logout', logout_user, name='logout'),
     path('add_file', AddFileView.as_view(), name='add_file'),
-    path('<slug:slug>/', FileDetail.as_view(), name='file_detail'),
+    # path('<slug:slug>/', FileDetail.as_view(), name='file_detail'),
+    path('my_files', MyFilesView.as_view(), name = 'my_files'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

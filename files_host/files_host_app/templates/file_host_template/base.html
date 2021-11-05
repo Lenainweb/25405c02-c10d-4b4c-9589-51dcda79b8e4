@@ -2,20 +2,19 @@
 
 <html>
     <head>
-        <title>Lena's network</title>
+        <title>Lena`s cloud file storage</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+		
     </head>
     <body>
     	<body>
 		    <div class="page-header">
 				
 				{% if user.is_authenticated %}
-					<h3>You are logged in as {{user}}</h3>
-					<!-- <a href="{#url 'post_new'#}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> -->
+					<h3>You are logged in as {{user}}</h3>			
 					<h1><a href="{%url 'home'%}">Lena`s cloud file storage</a></h1>
-					<h1><a href="">My files</a></h1>
+					<h1><a href="{%url 'my_files'%}">My files</a></h1>
 					<h1><a href="{%url 'add_file'%}">Add file</a></h1>
 					<h1><a href="{%url 'logout'%}">Logout</a></h1>					
 				{% else%}

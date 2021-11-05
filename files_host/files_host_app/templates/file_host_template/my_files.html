@@ -1,0 +1,11 @@
+{% extends 'file_host_template/base.html' %}
+
+{% block content %}
+        <h2>My files</h2>
+        {% for file in my_files %}
+                <div>                        
+                        <a href="../media/{{file.file.name}}" download={{file.original_filename}}><h2>{{ file}}</h2></a>{{file.permission_for_file}}
+                </div>
+        
+        {% endfor %}
+{% endblock %}
