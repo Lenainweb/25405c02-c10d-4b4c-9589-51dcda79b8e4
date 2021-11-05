@@ -91,7 +91,8 @@ class AddFileView(TemplateView):
 class FileDetail(DetailView):
 
     model = File
-    slug_field = "guid_name"
+    slug_field = "id"
     context_object_name = 'file_detail'
     template_name = "file_host_template/file_detail.html"
 
+    
