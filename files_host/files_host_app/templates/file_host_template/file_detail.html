@@ -1,0 +1,8 @@
+{% extends 'file_host_template/base.html' %}
+
+{% block content %}
+        <h2>{{file_detail}}</h2>
+        <a href="{{ file.get_absolute_url }} download" download><h2>{{ file_detail.file}}</h2></a>
+
+        
+{% endblock %}

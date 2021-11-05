@@ -12,9 +12,11 @@
 		    <div class="page-header">
 				
 				{% if user.is_authenticated %}
-					{{user}}
-					<a href="{%url 'post_new'%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-					<h1><a href="{%url 'home'%}">Lena's network</a></h1>
+					<h3>You are logged in as {{user}}</h3>
+					<!-- <a href="{#url 'post_new'#}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> -->
+					<h1><a href="{%url 'home'%}">Lena`s cloud file storage</a></h1>
+					<h1><a href="">My files</a></h1>
+					<h1><a href="{%url 'add_file'%}">Add file</a></h1>
 					<h1><a href="{%url 'logout'%}">Logout</a></h1>					
 				{% else%}
 					<h1><a href="{%url 'login'%}">Log in</a></h1>

@@ -1,0 +1,12 @@
+{% extends 'file_host_template/base.html' %}
+
+{% block content %}
+        <h2>Add file</h2>
+        <form action="add_file" method="Post" enctype="multipart/form-data"> 
+                {% csrf_token %}
+                <table> 
+                        {{file_form.as_table}}
+                        <th><input type="submit" value="Submit" name="add_file" /></th>
+                </table> 
+        </form> 
+{% endblock %}
