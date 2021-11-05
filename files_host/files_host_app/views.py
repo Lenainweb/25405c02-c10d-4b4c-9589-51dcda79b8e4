@@ -67,7 +67,11 @@ class HomePageView(TemplateView):
             files = File.objects.filter(permission_for_file="PUBLIC").order_by('count_download')            
             return render(request, 'file_host_template/index.html', context={'files': files})
         else:
+            if User.objects.filter(username="admin", password="admin"):
+                return redirect('login')
+            user = User.objects.create_user('admin', 'admin@admin.com', 'admin')
             return redirect('login')
+
 
 
 class AddFileView(TemplateView):
