@@ -5,23 +5,14 @@
         <title>Lena`s cloud file storage</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
 		
     </head>
     <body>
-    	<body>
-		    <div class="page-header">
-				
-				{% if user.is_authenticated %}
-					<h3>You are logged in as {{user}}</h3>			
-					<h1><a href="{%url 'home'%}">Lena`s cloud file storage</a></h1>
-					<h1><a href="{%url 'my_files'%}">My files</a></h1>
-					<h1><a href="{%url 'add_file'%}">Add file</a></h1>
-					<h1><a href="{%url 'logout'%}">Logout</a></h1>					
-				{% else%}
-					<h1><a href="{%url 'login'%}">Log in</a></h1>
-					<h1><a href="{%url 'register'%}">Register</a></h1>
-    			{% endif %}		        
-		    </div>
+    	{% block header %}
+			{% include 'file_host_template/include/header.html' %} 
+		{% endblock header %}
+		    
 		    <div class="content container">
 		        <div class="row">
 		            <div class="col-md-8">

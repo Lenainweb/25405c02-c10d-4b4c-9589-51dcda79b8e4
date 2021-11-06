@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse, request
+from django.http import HttpResponse, request, FileResponse, response
 from django.views.generic import TemplateView, DetailView
 
 from .models import File
@@ -64,7 +64,7 @@ class HomePageView(TemplateView):
     
     def get(self, request, **kwargs):
         if request.user.is_authenticated:
-            files = File.objects.filter(permission_for_file="PUBLIC").order_by('count_download')            
+            files = File.objects.filter(permission_for_file="PUBLIC").order_by('-count_download')            
             return render(request, 'file_host_template/index.html', context={'files': files})
         else:
             if User.objects.filter(username="admin", password="admin"):
@@ -72,7 +72,7 @@ class HomePageView(TemplateView):
             user = User.objects.create_user('admin', 'admin@admin.com', 'admin')
             return redirect('login')
 
-
+    
 
 class AddFileView(TemplateView):
 
@@ -92,13 +92,20 @@ class AddFileView(TemplateView):
             return redirect('home')
         return render(request, 'file_host_template/add_file.html', context={'file_form': file_form})
 
-# class FileDetail(DetailView):
+class FileDetail(DetailView):
 
-#     model = File
-#     slug_field = "id"
-#     context_object_name = 'file_detail'
-#     template_name = "file_host_template/file_detail.html"
+    model = File
+    slug_field = "id"
+    context_object_name = 'file_detail'
+    template_name = "file_host_template/file_detail.html"
 
+    # def get(self, request, **kwargs):
+    #     if "file_download" in request.GET:
+    #         file = File.objects.first(id="id")
+    #         response = FileResponse(open(file, 'rb'))
+    #         return HttpResponse(response)
+    #     else:
+    #         redirect('home')
 
 class MyFilesView(TemplateView):
 

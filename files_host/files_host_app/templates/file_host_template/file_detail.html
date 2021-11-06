@@ -2,7 +2,11 @@
 
 {% block content %}
         <h2>{{file_detail}}</h2>
-        <a href="../media/{{file_detail.file.name}}" download={{file_detail.original_filename}}><h2>{{ file_detail.file}}</h2></a>
+
+        <!-- <input type="submit" value="file_download"  name="file_download" /> -->
+        <a href="../media/{{file_detail.file.name}}" download={{file_detail.original_filename}}><h2 onclick="{{file_detail.count_downloaded}}">DOWNLOAD</h2></a>
+
 
         
 {% endblock %}
+

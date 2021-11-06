@@ -3,9 +3,17 @@
 {% block content %}
         <h2>Files</h2>
         {% for file in files %}
-                <div>                        
-                        <a href="../media/{{file.file.name}}" download={{file.original_filename}}><h2>{{ file}}</h2></a>
-                </div>
+                
+                <ul>                        
+                        <li> <a href="{{ file.get_absolute_url }}">{{ file }} </a>{{file.count_download}}</li>
+                </ul> 
         
         {% endfor %}
 {% endblock %}
+
+<!-- <div>
+                        <ul>                        
+                                <li><a href="../media/{{file.file.name}} " download={{file.original_filename}}><h2 click="{{file.count_downloaded}}">{{ file}}</h2></a></li>
+                                {{file.count_download}}
+                        </ul>
+                </div> -->

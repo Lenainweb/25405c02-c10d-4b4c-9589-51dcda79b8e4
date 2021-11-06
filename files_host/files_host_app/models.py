@@ -12,7 +12,7 @@ class File(models.Model):
     ]
 
     original_filename = models.CharField("original filename", max_length=50)
-    guid_name = models.CharField("Globally Unique Identifier", max_length=40)
+    guid_name = models.CharField("Globally Unique Identifier", unique=True, max_length=40)
     owner = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     file = models.FileField(upload_to="uploads/")
     permission_for_file = models.CharField("permission for file", choices=PERMISSION, default="PRIVAT", max_length=8)
@@ -20,6 +20,13 @@ class File(models.Model):
 
     def get_absolute_url(self):
         return reverse("file_detail", kwargs={"slug": self.id})
+
+    def count_downloaded(self):
+        '''Счетчик клика по ссылке'''
     
+        self.count_download += 1
+        self.save()
+        
+        
     def __str__(self) -> str:
         return self.original_filename
