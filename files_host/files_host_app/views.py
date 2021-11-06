@@ -64,7 +64,7 @@ class HomePageView(TemplateView):
     
     def get(self, request, **kwargs):
         if request.user.is_authenticated:
-            files = File.objects.filter(permission_for_file="PUBLIC").order_by('count_download')            
+            files = File.objects.filter(permission_for_file="PUBLIC").order_by('-count_download')            
             return render(request, 'file_host_template/index.html', context={'files': files})
         else:
             if User.objects.filter(username="admin", password="admin"):
