@@ -1,5 +1,5 @@
 
-![python3.x](https://img.shields.io/badge/python-3.x-brightgreen.svg) ![django2.x](https://img.shields.io/badge/%20Django-2.0.1-green.svg)
+![python3.x](https://img.shields.io/badge/python-3.x-brightgreen.svg) ![django3.x](https://img.shields.io/badge/Django%20-3.2.9-green)
 
 ## Setting up
 
