@@ -3,7 +3,9 @@ from django.urls import reverse
 from django.conf import settings
 
 class File(models.Model):
-    """model for file"""
+    """
+    model for file
+    """
 
     PERMISSION = [
         ("PRIVAT", "private"),
@@ -22,7 +24,9 @@ class File(models.Model):
         return reverse("file_detail", kwargs={"slug": self.id})
 
     def count_downloaded(self):
-        '''Счетчик клика по ссылке'''
+        '''
+        Link clicks counter
+        '''
     
         self.count_download += 1
         self.save()

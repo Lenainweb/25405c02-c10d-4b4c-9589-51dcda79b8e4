@@ -28,7 +28,10 @@ def login_user(request):
     login(request, user_au)
 
 
-class AuthenticatedView(TemplateView):   
+class AuthenticatedView(TemplateView):
+    """ 
+    user authentication page 
+    """   
     
     def get(self, request, **kwargs): 
         login_form = AuthenticationForm()      
@@ -43,7 +46,10 @@ class AuthenticatedView(TemplateView):
         return redirect('home')
 
 
-class RegisterView(TemplateView):    
+class RegisterView(TemplateView): 
+    """ 
+    user registration page 
+    """   
 
     def get(self, request, **kwargs):
         register_form = UserCreationForm()     
@@ -61,20 +67,27 @@ class RegisterView(TemplateView):
 
 
 class HomePageView(TemplateView):
+    """ 
+    main page with a list of all public files 
+    """
     
     def get(self, request, **kwargs):
         if request.user.is_authenticated:
             files = File.objects.filter(permission_for_file="PUBLIC").order_by('-count_download')            
             return render(request, 'file_host_template/index.html', context={'files': files})
         else:
-            if User.objects.filter(username="admin", password="admin"):
+            if User.objects.filter(username="admin"):
                 return redirect('login')
-            user = User.objects.create_user('admin', 'admin@admin.com', 'admin')
+            else:
+                user = User.objects.create_user('admin', 'admin@admin.com', 'admin')
             return redirect('login')
 
     
 
 class AddFileView(TemplateView):
+    """ 
+    page with a file adding form 
+    """
 
     def get(self, request, **kwargs):
         file_form = FileForm()     
@@ -93,6 +106,9 @@ class AddFileView(TemplateView):
         return render(request, 'file_host_template/add_file.html', context={'file_form': file_form})
 
 class FileDetail(DetailView):
+    """ 
+    file details and download link 
+    """
 
     model = File
     slug_field = "id"
@@ -108,6 +124,9 @@ class FileDetail(DetailView):
     #         redirect('home')
 
 class MyFilesView(TemplateView):
+    """ 
+    displays a list of files uploaded by the user 
+    """
 
     def get(self, request, **kwargs):
         if request.user.is_authenticated:
